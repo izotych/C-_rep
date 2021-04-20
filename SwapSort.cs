@@ -47,15 +47,5 @@ namespace Kata_sandbox
                 Console.WriteLine(elem);
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
