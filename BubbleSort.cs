@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text.RegularExpressions;
-
 namespace Kata_sandbox
 {
     class Program
@@ -53,15 +47,5 @@ namespace Kata_sandbox
                 Console.WriteLine(elem);
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
