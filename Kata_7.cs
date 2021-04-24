@@ -19,12 +19,6 @@ namespace ConsoleApp4
                 ["Thursday"] = "Michael",
                 ["Friday"] = "William"
             };
-            
-            
-
-
-
-
             return $"It is {w} today, {timetable[w]}, you have to work, you must spray {n} trees and you need {n*c} dollars to buy liquid";
             //It is (weekday) today, (name), you have to work, you must spray (number) trees and you need (x) dollars to buy liquid
             //James John Robert Michael William
