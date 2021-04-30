@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\Izotych\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Izotych\\.nuget\\packages"
-    ]
-  }
-}
