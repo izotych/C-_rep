@@ -1,0 +1,101 @@
+using System;
+
+
+namespace Solution
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            int x = MinPermutation(29394);
+
+            Console.WriteLine(x);
+        }
+
+        public static int MinPermutation(int n)
+        {
+            bool WeHaveZeros = false;
+            int[] integersArray = CreateIntArray(n, ref WeHaveZeros);
+            int[] sortedIntegesArray = SortNumbersArray(integersArray);
+
+            if(WeHaveZeros == true)
+            {
+                int[] zerosAtStart = MoveZerosToStart(sortedIntegesArray);
+                string numbersString = ConverseArrayTostring(zerosAtStart);
+                int result = Int32.Parse(numbersString);
+                return result;
+            }
+            else
+            {
+                string numbersString = ConverseArrayTostring(sortedIntegesArray);
+                int result = Int32.Parse(numbersString);
+                return result;
+            }
+        }
+        public static int[] CreateIntArray(int numberToArray, ref bool HaveZeros)
+        {
+            string strNumber = numberToArray.ToString();
+            int[] numbersArray = new int[strNumber.Length];
+            for(int index = 0; index < strNumber.Length; index++)
+            {
+                numbersArray[index] = Int32.Parse(strNumber[index].ToString());
+                if (numbersArray[index] == 0)
+                {
+                    HaveZeros = true;
+                }
+            }
+            return numbersArray;
+        }
+        public static int[] SortNumbersArray(int[] array)
+        {
+            int[] resultArray = array;
+            int swapValue;
+            for(int i = 0; i < resultArray.Length; i++)
+                {
+                    for(int j = 0; j < resultArray.Length - 1 - i; j++)
+                    {
+                        if (resultArray[j] > resultArray[j + 1])
+                        {
+                            swapValue = resultArray[j];
+                            resultArray[j] = resultArray[j + 1];
+                            resultArray[j + 1] = swapValue;
+                            
+                        }
+                    }
+                }
+            return resultArray;
+        }
+        public static int[] MoveZerosToStart(int[] array)
+        {
+            int[] resultArray = new int[array.Length];
+            for(int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == 0)
+                {
+                    resultArray[i + 1] = array[i];
+                }
+                else if (array[i] != 0 && array[i - 1] == 0)
+                {
+                    resultArray[0] = array[i];
+                }
+                else
+                {
+                    resultArray[i] = array[i];
+                }
+            }
+            return resultArray;
+        }
+
+        public static string ConverseArrayTostring(int[] array)
+        {
+            string result = string.Empty;
+            for(int i = 0; i < array.Length; i++)
+            {
+                result += array[i];
+            }
+            return result;
+        }
+    }
+        
+    
+}
