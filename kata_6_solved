@@ -7,37 +7,60 @@ namespace Solution
     {
         public static void Main(string[] args)
         {
-            int x = MinPermutation(29394);
+            Kata kata = new Kata();
+            int x = kata.MinPermutation(0);
+            int x1 = kata.MinPermutation(-205);
+            int x2 = kata.MinPermutation(2649849);
 
-            Console.WriteLine(x);
+            Console.WriteLine($"x = {x}, x1 = {x1}, x2 = {x2}");
         }
 
-        public static int MinPermutation(int n)
+
+    }
+    public class Kata
+    {
+        public  int MinPermutation(int n)
         {
-            bool WeHaveZeros = false;
+            int result = 0;
+            if(n == 0)
+            {
+                return result;
+            }
+            bool numberNegative = false;
+            if(n < 0)
+            {
+                n = Math.Abs(n);
+                numberNegative = true;
+            }
+            bool WeHaveZeros = false;            
             int[] integersArray = CreateIntArray(n, ref WeHaveZeros);
             int[] sortedIntegesArray = SortNumbersArray(integersArray);
 
-            if(WeHaveZeros == true)
+            if (WeHaveZeros == true)
             {
                 int[] zerosAtStart = MoveZerosToStart(sortedIntegesArray);
                 string numbersString = ConverseArrayTostring(zerosAtStart);
-                int result = Int32.Parse(numbersString);
-                return result;
+                result = Int32.Parse(numbersString);               
             }
             else
             {
                 string numbersString = ConverseArrayTostring(sortedIntegesArray);
-                int result = Int32.Parse(numbersString);
-                return result;
+                result = Int32.Parse(numbersString);                
             }
+
+            if(numberNegative == true)
+            {
+                result *= -1;
+            }
+            return result;
         }
-        public static int[] CreateIntArray(int numberToArray, ref bool HaveZeros)
+        public  int[] CreateIntArray(int numberToArray, ref bool HaveZeros)
         {
             string strNumber = numberToArray.ToString();
             int[] numbersArray = new int[strNumber.Length];
-            for(int index = 0; index < strNumber.Length; index++)
+            for (int index = 0; index < strNumber.Length; index++)
             {
+
                 numbersArray[index] = Int32.Parse(strNumber[index].ToString());
                 if (numbersArray[index] == 0)
                 {
@@ -46,29 +69,29 @@ namespace Solution
             }
             return numbersArray;
         }
-        public static int[] SortNumbersArray(int[] array)
+        public  int[] SortNumbersArray(int[] array)
         {
             int[] resultArray = array;
             int swapValue;
-            for(int i = 0; i < resultArray.Length; i++)
+            for (int i = 0; i < resultArray.Length; i++)
+            {
+                for (int j = 0; j < resultArray.Length - 1 - i; j++)
                 {
-                    for(int j = 0; j < resultArray.Length - 1 - i; j++)
+                    if (resultArray[j] > resultArray[j + 1])
                     {
-                        if (resultArray[j] > resultArray[j + 1])
-                        {
-                            swapValue = resultArray[j];
-                            resultArray[j] = resultArray[j + 1];
-                            resultArray[j + 1] = swapValue;
-                            
-                        }
+                        swapValue = resultArray[j];
+                        resultArray[j] = resultArray[j + 1];
+                        resultArray[j + 1] = swapValue;
+
                     }
                 }
+            }
             return resultArray;
         }
-        public static int[] MoveZerosToStart(int[] array)
+        public  int[] MoveZerosToStart(int[] array)
         {
             int[] resultArray = new int[array.Length];
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == 0)
                 {
@@ -86,10 +109,10 @@ namespace Solution
             return resultArray;
         }
 
-        public static string ConverseArrayTostring(int[] array)
+        public  string ConverseArrayTostring(int[] array)
         {
             string result = string.Empty;
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 result += array[i];
             }
