@@ -21,22 +21,22 @@ namespace Solution
     {
         public  int MinPermutation(int n)
         {
-            int result = 0;
-            if(n == 0)
+            int result = 0; //ставим значение по умолчанию
+            if(n == 0) //проверяем равно ли нулю входящее число
             {
                 return result;
             }
-            bool numberNegative = false;
+            bool numberNegative = false; //проверяем отрицательное число или нет
             if(n < 0)
             {
                 n = Math.Abs(n);
                 numberNegative = true;
             }
-            bool WeHaveZeros = false;            
+            bool WeHaveZeros = false;  //узнаём содержит ли число нули          
             int[] integersArray = CreateIntArray(n, ref WeHaveZeros);
             int[] sortedIntegesArray = SortNumbersArray(integersArray);
 
-            if (WeHaveZeros == true)
+            if (WeHaveZeros == true) //меняется логика перестановки, нули не должны быть вначале числа
             {
                 int[] zerosAtStart = MoveZerosToStart(sortedIntegesArray);
                 string numbersString = ConverseArrayTostring(zerosAtStart);
@@ -48,13 +48,13 @@ namespace Solution
                 result = Int32.Parse(numbersString);                
             }
 
-            if(numberNegative == true)
+            if(numberNegative == true) //возвращаем знак если он был отрицательным
             {
                 result *= -1;
             }
             return result;
         }
-        public  int[] CreateIntArray(int numberToArray, ref bool HaveZeros)
+        public  int[] CreateIntArray(int numberToArray, ref bool HaveZeros) //Создаём массив чисел для сортировки
         {
             string strNumber = numberToArray.ToString();
             int[] numbersArray = new int[strNumber.Length];
@@ -69,7 +69,7 @@ namespace Solution
             }
             return numbersArray;
         }
-        public  int[] SortNumbersArray(int[] array)
+        public  int[] SortNumbersArray(int[] array) //сортируем массив (примитивно пузырьком)
         {
             int[] resultArray = array;
             int swapValue;
@@ -88,7 +88,7 @@ namespace Solution
             }
             return resultArray;
         }
-        public  int[] MoveZerosToStart(int[] array)
+        public  int[] MoveZerosToStart(int[] array) //если были нули, передвигаем первое ненулевое число в начало массива
         {
             int[] resultArray = new int[array.Length];
             for (int i = 0; i < array.Length; i++)
@@ -109,7 +109,7 @@ namespace Solution
             return resultArray;
         }
 
-        public  string ConverseArrayTostring(int[] array)
+        public  string ConverseArrayTostring(int[] array) //преобразуем массив в строку
         {
             string result = string.Empty;
             for (int i = 0; i < array.Length; i++)
