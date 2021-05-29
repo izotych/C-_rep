@@ -1,0 +1,84 @@
+using System;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Введите количество строк матрицы");
+            int matrixStrings = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Введите количвество столбцов матрицы");
+            int matrixColums = Int32.Parse(Console.ReadLine());
+
+            int[,] array = new int[matrixStrings, matrixColums];
+
+            Console.WriteLine("Через пробел введите значения в поля матрицы");
+
+            for (int i = 0; i < matrixStrings; i++)
+            {
+                Console.WriteLine($"Значения {i} строки, введите через пробел {matrixColums} элементов");
+                string[] inputString = Console.ReadLine().Split(" ");
+                for(int j = 0; j < matrixColums; j++)
+                {
+                    array[i, j] = Int32.Parse(inputString[j]);
+                }
+            }
+
+            Console.WriteLine("Введите первую координату элемента, соседей которого нужно найти");
+            int firstPos = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Введите вторую координату элемента, соседей которого нужно найти");
+            int secondPos = Int32.Parse(Console.ReadLine());                     
+
+            int[] resultArray = new int[4];
+
+            if(firstPos - 1 >= 0)
+            {
+                resultArray[0] = array[firstPos - 1, secondPos];
+            }
+            else
+            {
+                resultArray[0] = -1;
+            }
+            if(firstPos + 1 <= matrixStrings - 1)
+            {
+                resultArray[1] = array[firstPos + 1, secondPos];
+            }
+            else
+            {
+                resultArray[1] = -1;
+            }
+            if (secondPos - 1 >= 0)
+            {
+                resultArray[2] = array[firstPos, secondPos - 1];
+            }
+            else
+            {
+                resultArray[2] = -1;
+            }
+            if (secondPos + 1 <= matrixColums - 1)
+            {
+                resultArray[3] = array[firstPos, secondPos + 1];
+            }
+            else
+            {
+                resultArray[3] = -1;
+            }
+
+            Array.Sort(resultArray);
+
+            Console.WriteLine("Ознакомьтесь с выводом");
+            string output = string.Empty;
+
+            foreach (int elem in resultArray)
+            {
+                if (elem != -1) {
+                    output += $"{elem} ";
+                }   
+            }
+
+            Console.WriteLine(output); 
+        }
+    }
+}
